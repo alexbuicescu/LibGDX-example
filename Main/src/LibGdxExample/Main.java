@@ -8,7 +8,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 
 public class Main extends Game {
     private SpriteBatch batch;
@@ -18,12 +20,17 @@ public class Main extends Game {
     Texture textureSolid;
     private OrthographicCamera cam;
     private Segment segment;
+    Vector2 cameraZoom;
+    Vector2 targetZoom;
+
 
     @Override
     public void create() {
         batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.BLACK);
+        cameraZoom = new Vector2(1, 0);
+        targetZoom = new Vector2(1, 0);
         initPoly();
         initCamera();
         segment = new Segment(new Point(100, 100), new Point(200, 250));
@@ -67,10 +74,10 @@ public class Main extends Game {
 
     private void handleInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            cam.zoom += 1.02;
+            targetZoom.x += 0.02;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            cam.zoom -= 1.02;
+            targetZoom.x -= 0.02;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             cam.translate(-3, 0, 0);
@@ -91,7 +98,11 @@ public class Main extends Game {
 //            cam.rotate(rotationSpeed, 0, 0, 1);
         }
 
-        cam.zoom = MathUtils.clamp(cam.zoom, 1.f, 100);
+
+//        Vector2 zoomVec = new Vector2(zoom)
+
+        cameraZoom.x = cam.zoom;
+        cam.zoom = MathUtils.clamp(cameraZoom.interpolate(targetZoom, 0.25f, Interpolation.exp5).x, 1.f, 100);
 
         float effectiveViewportWidth = cam.viewportWidth * cam.zoom;
         float effectiveViewportHeight = cam.viewportHeight * cam.zoom;
