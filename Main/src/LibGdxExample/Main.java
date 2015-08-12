@@ -1,5 +1,7 @@
 package LibGdxExample;
 
+import LibGdxExample.POJO.Point;
+import LibGdxExample.POJO.Segment;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -14,6 +16,7 @@ public class Main extends Game {
     PolygonSpriteBatch polyBatch;
     Texture textureSolid;
     private OrthographicCamera cam;
+    private Segment segment;
 
     @Override
     public void create() {
@@ -22,6 +25,7 @@ public class Main extends Game {
         font.setColor(Color.BLACK);
         initPoly();
         initCamera();
+        segment = new Segment(new Point(100, 100), new Point(200, 250));
     }
 
     @Override
@@ -47,6 +51,8 @@ public class Main extends Game {
         polyBatch.begin();
         poly.draw(polyBatch);
         polyBatch.end();
+
+        segment.render(cam);
     }
 
     private void handleInput() {

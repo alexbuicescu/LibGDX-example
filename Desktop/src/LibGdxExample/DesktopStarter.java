@@ -12,6 +12,7 @@ public class DesktopStarter {
         cfg.title = "Title";
         cfg.width = 800;
         cfg.height = 480;
+        cfg.samples = 3; //making smooth lines
         new LwjglApplication(new Main(), cfg);
     }
 }
