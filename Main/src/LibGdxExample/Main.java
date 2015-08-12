@@ -3,6 +3,7 @@ package LibGdxExample;
 import LibGdxExample.POJO.Point;
 import LibGdxExample.POJO.Polygon;
 import LibGdxExample.POJO.Segment;
+import LibGdxExample.Utils.ResourcesUtils;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -11,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+
+import java.util.ArrayList;
 
 public class Main extends Game {
     private SpriteBatch batch;
@@ -23,6 +26,7 @@ public class Main extends Game {
     Vector2 cameraZoom;
     Vector2 targetZoom;
 
+    ArrayList<Polygon> polygons;
 
     @Override
     public void create() {
@@ -34,6 +38,8 @@ public class Main extends Game {
         initPoly();
         initCamera();
         segment = new Segment(new Point(100, 100), new Point(200, 250));
+
+        polygons = ResourcesUtils.readPolygons();
     }
 
     @Override
@@ -60,14 +66,10 @@ public class Main extends Game {
 //        poly.draw(polyBatch);
 //        polyBatch.end();
 
-        Polygon polygon = new Polygon();
-        polygon.addPoint(new Point(100, 100));
-        polygon.addPoint(new Point(300, 100));
-        polygon.addPoint(new Point(300, 300));
-        polygon.addPoint(new Point(200, 200));
-        polygon.addPoint(new Point(100, 300), true);
-
-        polygon.render(cam);
+        for(Polygon polygon : polygons)
+        {
+            polygon.render(cam);
+        }
 
         segment.render(cam);
     }

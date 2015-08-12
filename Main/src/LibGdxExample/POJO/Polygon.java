@@ -28,9 +28,9 @@ public class Polygon {
         points = new ArrayList<Point>();
     }
 
-    public Polygon(ArrayList<Point> points)
+    public Polygon(ArrayList<Point> points, boolean... updateTriangles)
     {
-        this.points = points;
+        setPoints(points, updateTriangles);
     }
 
     public ArrayList<Point> getPoints() {
@@ -84,7 +84,7 @@ public class Polygon {
 //        short[] triangles = new short[];
     }
 
-    private void initPoly()
+    public void initPoly()
     {
         // Creating the color filling (but textures would work the same way)
         Pixmap pix = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
