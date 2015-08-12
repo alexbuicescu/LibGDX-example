@@ -85,45 +85,110 @@ public class Utils {
         return segments;
     }
 
-    private static boolean canTopSegmentExist(Point point1, Point point2, Point point3) {
+//    private static boolean canTopSegmentExist(Point point1, Point point2, Point point3) {
+//
+//        if (orientation(point1, point2, point3) == 1) {
+//            lastOrientation = 1;
+//        } else if (orientation(point1, point2, point3) == -1) {
+//            lastOrientation = -1;
+//        }
+//
+//        if (lastOrientation == -1 &&
+//                (point1.getyCoordinate() < point2.getyCoordinate() ||
+//                        point1.getyCoordinate() < point3.getyCoordinate())) {
+//            point1.setChecked(true);
+//            return true;
+//        } else if (lastOrientation == 1 &&
+//                (point1.getyCoordinate() > point2.getyCoordinate() ||
+//                        point1.getyCoordinate() > point3.getyCoordinate())) {
+//            point1.setChecked(true);
+//            return true;
+//        }
+//        return false;
+//    }
 
-        if (orientation(point1, point2, point3) == 1) {
-            lastOrientation = 1;
-        } else if (orientation(point1, point2, point3) == -1) {
-            lastOrientation = -1;
+    private static boolean canBottomSegmentExist(Point point1, Point point2, Point point3) {//}, int orientation) {
+        Point equalPoint = null;
+
+        if (point1.getxCoordinate() == point2.getxCoordinate()) {
+            equalPoint = point2;
+        } else if (point1.getxCoordinate() == point3.getxCoordinate()) {
+            equalPoint = point3;
         }
 
-        if (lastOrientation == -1 &&
-                (point1.getyCoordinate() < point2.getyCoordinate() ||
-                        point1.getyCoordinate() < point3.getyCoordinate())) {
+        if (equalPoint != null) {
             point1.setChecked(true);
-            return true;
-        } else if (lastOrientation == 1 &&
-                (point1.getyCoordinate() > point2.getyCoordinate() ||
-                        point1.getyCoordinate() > point3.getyCoordinate())) {
+            if (point1.getyCoordinate() < equalPoint.getyCoordinate() &&
+                    point1.getyCoordinate() > WorldBoundary.getBottom()) {
+                return true;
+            }
+            return false;
+        }
+
+        point1.setChecked(true);
+        return false;//polygonVerticesValid(point1, point2, point3, -1);
+    }
+
+    private static boolean canTopSegmentExist(Point point1, Point point2, Point point3) {//}, int orientation) {
+        Point equalPoint = null;
+
+        if (point1.getxCoordinate() == point2.getxCoordinate()) {
+            equalPoint = point2;
+        } else if (point1.getxCoordinate() == point3.getxCoordinate()) {
+            equalPoint = point3;
+        }
+
+        if (equalPoint != null) {
             point1.setChecked(true);
-            return true;
+            if (point1.getyCoordinate() > equalPoint.getyCoordinate() &&
+                    point1.getyCoordinate() < WorldBoundary.getTop()) {
+                return true;
+            }
+            return false;
+        }
+
+        point1.setChecked(true);
+        return false;//polygonVerticesValid(point1, point2, point3, 1);
+    }
+
+    private static boolean worldVerticesValid(Point point1, Point point2, Point point3) {//}, int orientation) {
+
+        if (orientation(point1, point2, point3) == 0) {
+//            if (orientation == 1 && ) {
+                return true;
+//            }
         }
         return false;
     }
 
-    private static boolean canBottomSegmentExist(Point point1, Point point2, Point point3) {
-
+    /**
+     *
+     * @param point1
+     * @param point2
+     * @param point3
+     * @return true if
+     */
+    private static boolean polygonVerticesValid(Point point1, Point point2, Point point3, int orientation)
+    {
         if (orientation(point1, point2, point3) == 1) {
             lastOrientation = 1;
         } else if (orientation(point1, point2, point3) == -1) {
             lastOrientation = -1;
         }
 
-        if (lastOrientation == 1 &&
-                (point1.getyCoordinate() < point2.getyCoordinate() ||
-                        point1.getyCoordinate() < point3.getyCoordinate())) {
+        System.out.println(point1.getxCoordinate() + " " + point1.getyCoordinate() + ";" +
+                point2.getxCoordinate() + " " + point2.getyCoordinate() + ";" +
+                point3.getxCoordinate() + " " + point3.getyCoordinate() + "; " + lastOrientation + " " + orientation);
+
+        if (lastOrientation == -1 && 1 == orientation) {// &&
+//                (point1.getyCoordinate() > point2.getyCoordinate() ||
+//                        point1.getyCoordinate() > point3.getyCoordinate())) {
 //            System.out.println(point1.getyCoordinate() + " " + point2.getyCoordinate() + " " + point3.getyCoordinate());
             point1.setChecked(true);
             return true;
-        } else if (lastOrientation == -1 &&
-                (point1.getyCoordinate() > point2.getyCoordinate() ||
-                        point1.getyCoordinate() > point3.getyCoordinate())) {
+        } else if (lastOrientation == 1 && -1 == orientation) {// &&
+//                (point1.getyCoordinate() < point2.getyCoordinate() ||
+//                        point1.getyCoordinate() < point3.getyCoordinate())) {
 //            System.out.println(point1.getyCoordinate() + " " + point2.getyCoordinate() + " " + point3.getyCoordinate());
             point1.setChecked(true);
             return true;
