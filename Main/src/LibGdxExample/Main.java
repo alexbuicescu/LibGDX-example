@@ -3,7 +3,9 @@ package LibGdxExample;
 import LibGdxExample.POJO.Point;
 import LibGdxExample.POJO.Polygon;
 import LibGdxExample.POJO.Segment;
+import LibGdxExample.POJO.WorldBoundary;
 import LibGdxExample.Utils.ResourcesUtils;
+import LibGdxExample.Utils.Utils;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -40,6 +42,7 @@ public class Main extends Game {
         segment = new Segment(new Point(100, 100), new Point(200, 250));
 
         polygons = ResourcesUtils.readPolygons();
+        Utils.setWorldContainer(polygons);
     }
 
     @Override
@@ -70,6 +73,8 @@ public class Main extends Game {
         {
             polygon.render(cam);
         }
+
+        WorldBoundary.render(cam);
 
         segment.render(cam);
     }
