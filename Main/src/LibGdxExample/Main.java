@@ -5,6 +5,7 @@ import LibGdxExample.POJO.Polygon;
 import LibGdxExample.POJO.Segment;
 import LibGdxExample.POJO.WorldBoundary;
 import LibGdxExample.Utils.ResourcesUtils;
+import LibGdxExample.Utils.SegmentUtils;
 import LibGdxExample.Utils.Utils;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -24,11 +25,11 @@ public class Main extends Game {
     PolygonSpriteBatch polyBatch;
     Texture textureSolid;
     private OrthographicCamera cam;
-    private Segment segment;
     Vector2 cameraZoom;
     Vector2 targetZoom;
 
     ArrayList<Polygon> polygons;
+    ArrayList<Segment> segments;
 
     @Override
     public void create() {
@@ -39,10 +40,10 @@ public class Main extends Game {
         targetZoom = new Vector2(1, 0);
         initPoly();
         initCamera();
-        segment = new Segment(new Point(100, 100), new Point(200, 250));
 
         polygons = ResourcesUtils.readPolygons();
         Utils.setWorldContainer(polygons);
+        segments = Utils.findSegments(polygons);
     }
 
     @Override
@@ -75,8 +76,7 @@ public class Main extends Game {
         }
 
         WorldBoundary.render(cam);
-
-        segment.render(cam);
+        SegmentUtils.renderSegments(segments, cam);
     }
 
     private void handleInput() {

@@ -7,6 +7,7 @@ public class Point {
 
     private float xCoordinate;
     private float yCoordinate;
+    private boolean checked;
 
     public Point(float xCoordinate, float yCoordinate)
     {
@@ -28,5 +29,13 @@ public class Point {
 
     public void setyCoordinate(float yCoordinate) {
         this.yCoordinate = yCoordinate;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }
