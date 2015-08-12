@@ -5,28 +5,28 @@ package LibGdxExample.POJO;
  */
 public class Point {
 
-    private double xCoordinate;
-    private double yCoordinate;
+    private float xCoordinate;
+    private float yCoordinate;
 
-    public Point(double xCoordinate, double yCoordinate)
+    public Point(float xCoordinate, float yCoordinate)
     {
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
     }
 
-    public double getxCoordinate() {
+    public float getxCoordinate() {
         return xCoordinate;
     }
 
-    public void setxCoordinate(double xCoordinate) {
+    public void setxCoordinate(float xCoordinate) {
         this.xCoordinate = xCoordinate;
     }
 
-    public double getyCoordinate() {
+    public float getyCoordinate() {
         return yCoordinate;
     }
 
-    public void setyCoordinate(double yCoordinate) {
+    public void setyCoordinate(float yCoordinate) {
         this.yCoordinate = yCoordinate;
     }
 }

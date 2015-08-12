@@ -1,6 +1,7 @@
 package LibGdxExample;
 
 import LibGdxExample.POJO.Point;
+import LibGdxExample.POJO.Polygon;
 import LibGdxExample.POJO.Segment;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -48,9 +49,18 @@ public class Main extends Game {
         font.draw(batch, "Hello World", 200, 200);
         batch.end();
 
-        polyBatch.begin();
-        poly.draw(polyBatch);
-        polyBatch.end();
+//        polyBatch.begin();
+//        poly.draw(polyBatch);
+//        polyBatch.end();
+
+        Polygon polygon = new Polygon();
+        polygon.addPoint(new Point(100, 100));
+        polygon.addPoint(new Point(300, 100));
+        polygon.addPoint(new Point(300, 300));
+        polygon.addPoint(new Point(200, 200));
+        polygon.addPoint(new Point(100, 300), true);
+
+        polygon.render(cam);
 
         segment.render(cam);
     }
@@ -116,6 +126,13 @@ public class Main extends Game {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
 
+        Polygon polygon = new Polygon();
+        polygon.addPoint(new Point(100, 100));
+        polygon.addPoint(new Point(300, 100));
+        polygon.addPoint(new Point(300, 300));
+        polygon.addPoint(new Point(200, 200));
+        polygon.addPoint(new Point(100, 300));
+
         float a = w/2;
         float b = h/2;
         PolygonRegion polyReg = new PolygonRegion(new TextureRegion(textureSolid),
@@ -128,7 +145,11 @@ public class Main extends Game {
                 0, 1, 2,         // Two triangles using vertex indices.
                 0, 3, 2          // Take care of the counter-clockwise direction.
         });
-        poly = new PolygonSprite(polyReg);
+
+        PolygonRegion polyReg2 = new PolygonRegion(new TextureRegion(textureSolid),
+                polygon.getPointsAsFloatArray(),
+                polygon.getTriangles().toArray());
+        poly = new PolygonSprite(polyReg2);
         poly.setOrigin(a, b);
         polyBatch = new PolygonSpriteBatch();
     }
