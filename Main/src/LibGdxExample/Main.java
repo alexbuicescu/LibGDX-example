@@ -44,6 +44,42 @@ public class Main extends Game {
         polygons = ResourcesUtils.readPolygons();
         Utils.setWorldContainer(polygons);
         segments = Utils.findSegments(polygons);
+        tests();
+    }
+
+    private void tests()
+    {
+        Segment segment1 = new Segment(new Point(0, 0), new Point(10, 10));
+        Segment segment2 = new Segment(new Point(5, 5), new Point(15, 15));
+
+        Segment segment3 = new Segment(new Point(0, 0), new Point(10, 0));
+        Segment segment4 = new Segment(new Point(5, 0), new Point(15, 0));
+
+        Segment segment5 = new Segment(new Point(0, 0), new Point(10, 10));
+        Segment segment6 = new Segment(new Point(10, 0), new Point(0, 10));
+
+        Segment segment7 = new Segment(new Point(0, 0), new Point(10, 10));
+        Segment segment8 = new Segment(new Point(10, 10), new Point(15, 15));
+
+        Segment segment9 = new Segment(new Point(200.0f, 200.0f), new Point(200.0f, 350.0f));
+        Segment segment10 = new Segment(new Point(100.0f, 100.0f), new Point(300.0f, 100.0f));
+
+        Segment segment11 = new Segment(new Point(0.0f, 1.0f), new Point(10.0f, 1.0f));
+        Segment segment12 = new Segment(new Point(5.0f, 5.0f), new Point(5.0f, 10.0f));
+
+        Point intersection1 = Polygon.intersection(segment1, segment2);
+        Point intersection2 = Polygon.intersection(segment3, segment4);
+        Point intersection3 = Polygon.intersection(segment5, segment6);
+        Point intersection4 = Polygon.intersection(segment7, segment8);
+        Point intersection5 = Polygon.intersection(segment9, segment10);
+        Point intersection6 = Polygon.intersection(segment11, segment12);
+
+        System.out.println(intersection1);
+        System.out.println(intersection2);
+        System.out.println(intersection3);
+        System.out.println(intersection4);
+        System.out.println(intersection5);
+        System.out.println(intersection6);
     }
 
     @Override
@@ -166,7 +202,7 @@ public class Main extends Game {
 
         PolygonRegion polyReg2 = new PolygonRegion(new TextureRegion(textureSolid),
                 polygon.getPointsAsFloatArray(),
-                polygon.getTriangles().toArray());
+                polygon.getTrianglesAsShortArray().toArray());
         poly = new PolygonSprite(polyReg2);
         poly.setOrigin(a, b);
         polyBatch = new PolygonSpriteBatch();

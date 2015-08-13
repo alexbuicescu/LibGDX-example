@@ -59,4 +59,9 @@ public class Segment {
         shapeRenderer.end();
     }
 
+    @Override
+    public String toString()
+    {
+        return point1.getxCoordinate() +  " " + point1.getyCoordinate()  + ";" + point2.getxCoordinate() + " " + point2.getyCoordinate();
+    }
 }

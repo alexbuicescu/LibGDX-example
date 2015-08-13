@@ -1,9 +1,6 @@
 package LibGdxExample.Utils;
 
-import LibGdxExample.POJO.Point;
-import LibGdxExample.POJO.Polygon;
-import LibGdxExample.POJO.Segment;
-import LibGdxExample.POJO.WorldBoundary;
+import LibGdxExample.POJO.*;
 
 import java.util.ArrayList;
 
@@ -40,6 +37,20 @@ public class Utils {
         {
             int i = 0;
             Integer nrOfCheckedPoints = 0;
+            for(Triangle triangle : polygon.getTrianglesAsPolys())
+            {
+                for(int j = 0 ; j < triangle.getIndices().length; j++)
+                {
+                    System.out.print(triangle.getIndices()[j]);
+                }
+                System.out.println("was1 " + i);
+            }
+
+            for(Short triangle : polygon.getTrianglesAsShortArray().toArray())
+            {
+                    System.out.print(triangle);
+            }
+            System.out.println("was2 " + i);
             while(nrOfCheckedPoints != polygon.getPoints().size()) {
 
                 i=i%polygon.getPoints().size();
@@ -68,9 +79,19 @@ public class Utils {
                             canTopSegmentExist(point, point1, point2)) {
                         segments.add(segmentTop);
                     }
+                    else
+                    if(!polygon.segmentIsInside(point, new Point(point.getxCoordinate(), WorldBoundary.getTop())))
+                    {
+                        segments.add(segmentTop);
+                    }
 
                     if (!SegmentUtils.pointsAreTheSame(segmentBottom.getPoint1(), segmentBottom.getPoint2()) &&
                             canBottomSegmentExist(point, point1, point2)) {
+                        segments.add(segmentBottom);
+                    }
+                    else
+                    if(!polygon.segmentIsInside(point, new Point(point.getxCoordinate(), WorldBoundary.getBottom())))
+                    {
                         segments.add(segmentBottom);
                     }
 

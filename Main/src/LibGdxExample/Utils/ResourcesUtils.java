@@ -22,6 +22,7 @@ public class ResourcesUtils {
 
             for(String polygonString : polygonsString)
             {
+                short index = 0;
                 String[] polygonVertices = polygonString.split("\n");
                 ArrayList<Point> polygonVerticesArrayList = new ArrayList<Point>();
 
@@ -30,9 +31,11 @@ public class ResourcesUtils {
                     polygonVerticesArrayList.add(
                             new Point(
                                     Float.parseFloat(polygonVertex[0]),
-                                    Float.parseFloat(polygonVertex[1])
+                                    Float.parseFloat(polygonVertex[1]),
+                                    index
                             )
                     );
+                    index++;
                 }
                 polygonArrayList.add(new Polygon(polygonVerticesArrayList, true));
             }

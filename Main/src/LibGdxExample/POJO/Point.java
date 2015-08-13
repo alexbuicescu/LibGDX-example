@@ -8,11 +8,17 @@ public class Point {
     private float xCoordinate;
     private float yCoordinate;
     private boolean checked;
+    private short index;
 
     public Point(float xCoordinate, float yCoordinate)
     {
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
+    }
+    public Point(float xCoordinate, float yCoordinate, short index)
+    {
+        this(xCoordinate, yCoordinate);
+        this.index = index;
     }
 
     public float getxCoordinate() {
@@ -37,5 +43,19 @@ public class Point {
 
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    public short getIndex() {
+        return index;
+    }
+
+    public void setIndex(short index) {
+        this.index = index;
+    }
+
+    @Override
+    public String toString()
+    {
+        return xCoordinate + " " + yCoordinate;
     }
 }
