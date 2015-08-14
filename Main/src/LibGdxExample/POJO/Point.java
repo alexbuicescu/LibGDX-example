@@ -58,4 +58,16 @@ public class Point {
     {
         return xCoordinate + " " + yCoordinate;
     }
+
+    @Override
+    public boolean equals(Object point) {
+        if (point != null && point instanceof Point) {
+            if(((Point) point).getxCoordinate() == getxCoordinate() &&
+                    ((Point) point).getyCoordinate() == getyCoordinate())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

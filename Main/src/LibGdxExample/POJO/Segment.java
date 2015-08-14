@@ -64,4 +64,20 @@ public class Segment {
     {
         return point1.getxCoordinate() +  " " + point1.getyCoordinate()  + ";" + point2.getxCoordinate() + " " + point2.getyCoordinate();
     }
+
+    @Override
+    public boolean equals(Object segment)
+    {
+        if(segment != null && segment instanceof Segment)
+        {
+            if((((Segment) segment).getPoint1().equals(getPoint1()) &&
+                    ((Segment) segment).getPoint2().equals(getPoint2())) ||
+                    (((Segment) segment).getPoint1().equals(getPoint2()) &&
+                    ((Segment) segment).getPoint2().equals(getPoint1())))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
